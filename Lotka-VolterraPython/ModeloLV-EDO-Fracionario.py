@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
-from fracdiff import FD
+from fracdiff import fdiff
 
 # Definição do modelo Lotka-Volterra
 def lotka_volterra(y, t, alpha, beta, delta, gamma):
