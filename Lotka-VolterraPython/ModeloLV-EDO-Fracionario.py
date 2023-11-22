@@ -1,15 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
-from fracdiff import fdiff
 
-# Definição do modelo Lotka-Volterra
-def lotka_volterra(y, t, alpha, beta, delta, gamma):
-    prey, predator = y
-    dydt = [alpha * prey - beta * prey * predator, delta * prey * predator - gamma * predator]
-    return dydt
-
-# Parâmetros do modelo Lotka-Volterra
+# Parâmetros do modelo
 alpha = 0.1
 beta = 0.02
 delta = 0.01
@@ -18,16 +11,14 @@ gamma = 0.1
 # Condições iniciais
 initial_conditions = [40, 9]
 
-# Tempo
+# Intervalo de tempo
 t = np.linspace(0, 200, 1000)
 
 # Resolução tradicional com EDOs
 solution_odeint = odeint(lotka_volterra, initial_conditions, t, args=(alpha, beta, delta, gamma))
 
 # Resolução com cálculo fracionário
-diff_order = 0.5  # Ordem da derivada fracionária
-fracdiff = FD(diff_order, h=t[1] - t[0])
-solution_fracdiff = fracdiff.diff(lotka_volterra, t, initial_conditions, args=(alpha, beta, delta, gamma))
+solution_fracdiff = lotka_volterra_fracdiff(initial_conditions, t, alpha, beta, delta, gamma)
 
 # Plotagem dos resultados
 plt.figure(figsize=(12, 6))
@@ -50,3 +41,4 @@ plt.legend()
 
 plt.tight_layout()
 plt.show()
+
