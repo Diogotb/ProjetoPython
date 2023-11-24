@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
-from fracdiff import FD
+from fracdiff import fracd
+
 
 # Definição do modelo Lotka-Volterra
 def lotka_volterra(y, t, alpha, beta, delta, gamma):
@@ -26,7 +27,7 @@ solution_odeint = odeint(lotka_volterra, initial_conditions, t, args=(alpha, bet
 
 # Resolução com cálculo fracionário
 diff_order = 0.5  # Ordem da derivada fracionária
-fracdiff = FD(diff_order, h=t[1] - t[0])
+fracdiff = fracd(diff_order, h=t[1] - t[0])
 solution_fracdiff = fracdiff.diff(lotka_volterra, t, initial_conditions, args=(alpha, beta, delta, gamma))
 
 # Plotagem dos resultados
