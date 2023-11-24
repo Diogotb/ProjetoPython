@@ -19,10 +19,10 @@ def f_fracdiff(u, t):
     return np.array([x ** 0.5 * (alpha - beta * y ** 0.5), -y ** 0.5 * (gamma - sigma * x ** 0.5)])
 
 # Condições iniciais
-u0 = [40, 9]
+u0 = [2, 1]
 
 # Intervalo de tempo
-t = np.linspace(0, 200, 1000)
+t = np.linspace(0, 10, 1000)
 
 # Resolvendo a equação diferencial para o modelo de Lotka-Volterra
 u = odeint(f, u0, t)

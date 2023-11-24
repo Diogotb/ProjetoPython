@@ -13,10 +13,10 @@ def f(u, t):
     return np.array([x * (alpha - beta * y), -y * (gamma - sigma * x)])
 
 # Condições iniciais
-u0 = [2, 1]
+u0 = [40, 9]
 
 # Intervalo de tempo
-t = np.linspace(0, 10, 1000)
+t = np.linspace(0, 200, 1000)
 
 # Resolvendo a equação diferencial
 u = np.zeros((len(t), 2))

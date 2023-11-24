@@ -39,10 +39,23 @@ for i in range(num_steps):
     x += dx
     y += dy
 
-# Plotagem do gráfico bidimensional
-plt.figure(figsize=(10, 6))
+# Configuração do plano (x, y) para os campos vetoriais
+x_range = np.linspace(min(x_values), max(x_values), 20)
+y_range = np.linspace(min(y_values), max(y_values), 20)
+x_derivatives, y_derivatives = np.meshgrid(x_range, y_range)
+dxdt = dt * (alpha * x_derivatives - beta * x_derivatives * y_derivatives)
+dydt = dt * (delta * x_derivatives * y_derivatives - gamma * y_derivatives)
+
+# Normaliza os vetores para melhor visualização
+magnitude = np.sqrt(dxdt**2 + dydt**2)
+dxdt /= magnitude
+dydt /= magnitude
+
+# Plotagem dos campos vetoriais
+plt.figure(figsize=(12, 8))
 plt.plot(x_values, y_values, label='Dinâmica Populacional')
-plt.title('Modelo Lotka-Volterra: Sistema Dinâmico Bidimensional')
+plt.quiver(x_derivatives, y_derivatives, dxdt, dydt, scale=35, color='red', label='Campos Vetoriais')
+plt.title('Modelo Lotka-Volterra: Campos Vetoriais')
 plt.xlabel('População de Coelhos')
 plt.ylabel('População de Raposas')
 plt.legend()

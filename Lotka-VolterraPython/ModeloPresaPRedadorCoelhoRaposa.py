@@ -1,15 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Parâmetros
-alpha = 0.1
-beta = 0.02
-gamma = 0.1
-delta = 0.01
+# Parâmetros do modelo Lotka-Volterra
+alpha = 0.1   # Taxa de crescimento dos coelhos na ausência de predadores
+beta = 0.02   # Taxa de predação dos coelhos pelas raposas
+gamma = 0.1   # Taxa de morte das raposas na ausência de presas
+delta = 0.01  # Taxa de crescimento das raposas devido à predação dos coelhos
 
 # Condições iniciais
-x0 = 40  # população inicial de coelhos
-y0 = 9   # população inicial de raposas
+x0 = 40  # População inicial de coelhos
+y0 = 9   # População inicial de raposas
 
 # Tempo
 T = 200
