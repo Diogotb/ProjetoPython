@@ -12,7 +12,7 @@ x0 = 40  # População inicial de coelhos
 y0 = 9   # População inicial de raposas
 
 # Configuração do tempo
-T = 200
+T = 200 
 dt = 0.1
 num_steps = int(T / dt)
 
