@@ -1,3 +1,4 @@
+# Importando bibliotecas necessárias
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -27,6 +28,7 @@ y = y0
 
 # Simulação do modelo Lotka-Volterra usando o método de Euler
 for i in range(num_steps):
+    # Armazenando valores atuais das populações e tempo
     x_values[i] = x
     y_values[i] = y
     time_values[i] = i * dt
@@ -35,14 +37,29 @@ for i in range(num_steps):
     dx = dt * (alpha * x - beta * x * y)
     dy = dt * (delta * x * y - gamma * y)
     
-    # Atualização das populações
+    # Atualização das populações usando as derivadas calculadas
     x += dx
     y += dy
 
-# Plotagem do gráfico bidimensional
-plt.figure(figsize=(10, 6))
+# Configuração do plano (x, y) para os campos vetoriais
+x_range = np.linspace(min(x_values), max(x_values), 20)
+y_range = np.linspace(min(y_values), max(y_values), 20)
+x_derivatives, y_derivatives = np.meshgrid(x_range, y_range)
+
+# Calculando as derivadas nos pontos do plano para os campos vetoriais
+dxdt = dt * (alpha * x_derivatives - beta * x_derivatives * y_derivatives)
+dydt = dt * (delta * x_derivatives * y_derivatives - gamma * y_derivatives)
+
+# Normalizando os vetores para melhor visualização
+magnitude = np.sqrt(dxdt**2 + dydt**2)
+dxdt /= magnitude
+dydt /= magnitude
+
+# Plotagem dos campos vetoriais
+plt.figure(figsize=(12, 8))
 plt.plot(x_values, y_values, label='Dinâmica Populacional')
-plt.title('Modelo Lotka-Volterra: Sistema Dinâmico Bidimensional')
+plt.quiver(x_derivatives, y_derivatives, dxdt, dydt, scale=40, color='red', label='Campos Vetoriais')
+plt.title('Modelo Lotka-Volterra: Campos Vetoriais')
 plt.xlabel('População de Coelhos')
 plt.ylabel('População de Raposas')
 plt.legend()

@@ -12,7 +12,7 @@ x0 = 40  # População inicial de coelhos
 y0 = 9   # População inicial de raposas
 
 # Configuração do tempo
-T = 200
+T = 200 
 dt = 0.1
 num_steps = int(T / dt)
 
@@ -39,23 +39,10 @@ for i in range(num_steps):
     x += dx
     y += dy
 
-# Configuração do plano (x, y) para os campos vetoriais
-x_range = np.linspace(min(x_values), max(x_values), 20)
-y_range = np.linspace(min(y_values), max(y_values), 20)
-x_derivatives, y_derivatives = np.meshgrid(x_range, y_range)
-dxdt = dt * (alpha * x_derivatives - beta * x_derivatives * y_derivatives)
-dydt = dt * (delta * x_derivatives * y_derivatives - gamma * y_derivatives)
-
-# Normaliza os vetores para melhor visualização
-magnitude = np.sqrt(dxdt**2 + dydt**2)
-dxdt /= magnitude
-dydt /= magnitude
-
-# Plotagem dos campos vetoriais
-plt.figure(figsize=(12, 8))
+# Plotagem do gráfico bidimensional
+plt.figure(figsize=(10, 6))
 plt.plot(x_values, y_values, label='Dinâmica Populacional')
-plt.quiver(x_derivatives, y_derivatives, dxdt, dydt, scale=35, color='red', label='Campos Vetoriais')
-plt.title('Modelo Lotka-Volterra: Campos Vetoriais')
+plt.title('Modelo Lotka-Volterra: Sistema Dinâmico Bidimensional')
 plt.xlabel('População de Coelhos')
 plt.ylabel('População de Raposas')
 plt.legend()
