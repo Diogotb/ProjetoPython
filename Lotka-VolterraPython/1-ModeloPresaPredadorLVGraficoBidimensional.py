@@ -30,11 +30,9 @@ for i in range(num_steps):
     x_values[i] = x
     y_values[i] = y
     time_values[i] = i * dt
-    
     # Equações de Lotka-Volterra usando o método de Euler
     dx = dt * (alpha * x - beta * x * y)
     dy = dt * (delta * x * y - gamma * y)
-    
     # Atualização das populações
     x += dx
     y += dy
